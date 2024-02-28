@@ -1,7 +1,7 @@
 <script lang="ts">
-	import DrawableCanvas from '$lib/DrawableCanvas.svelte';
+	import ExerciseCanvas from '$lib/ExerciseCanvas.svelte';
 </script>
 
 <div class="w-full h-screen">
-	<DrawableCanvas></DrawableCanvas>
+	<ExerciseCanvas></ExerciseCanvas>
 </div>
