@@ -17,9 +17,10 @@ export class Paper {
     }
 
     public setPenPosition(x: number, y: number) {
+        var { left, top } = this.canvasCtx.canvas.getBoundingClientRect();  // absolute position of canvas
         this.penPosition = {
-            x: x,
-            y: y,
+            x: x - left,
+            y: y - top
         }
     }
 
@@ -36,7 +37,8 @@ export class Paper {
         this.applyPenSettings();
         this.canvasCtx.beginPath();
         this.canvasCtx.moveTo(this.penPosition.x, this.penPosition.y);
-        this.canvasCtx.lineTo(x, y);
+        this.setPenPosition(x, y)
+        this.canvasCtx.lineTo(this.penPosition.x, this.penPosition.y);
         this.canvasCtx.stroke();
     }
 

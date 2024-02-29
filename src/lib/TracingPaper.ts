@@ -30,6 +30,7 @@ export class TracingPaper {
         this.backgroundCanvasCtx.fillText(text, x, y);
 
         this.foregroundCanvasCtx.font = "102pt Calibri"
-        this.foregroundCanvasCtx.fillText(text, x, y);
+        this.foregroundCanvasCtx.setLineDash([5, 3]);
+        this.foregroundCanvasCtx.strokeText(text, x, y);
     }
 }
