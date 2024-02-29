@@ -9,5 +9,7 @@
 		<TracingCanvas></TracingCanvas>
 		<DrawingCanvas></DrawingCanvas>
 	</div>
-	<Toolbar></Toolbar>
+	<div class="w-1/2 h-16 mt-4">
+		<Toolbar></Toolbar>
+	</div>
 </div>
