@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { TracingSettings, TracingText } from './Stores';
+	import { TracingSettingsStore, TracingTextStore } from './Stores';
 
 	let backgroundCanvas: HTMLCanvasElement;
 	let foregroundCanvas: HTMLCanvasElement;
@@ -8,8 +8,8 @@
 	let backgroundCtx: CanvasRenderingContext2D;
 	let foregroundCtx: CanvasRenderingContext2D;
 
-	let tracingSettings = $TracingSettings;
-	let tracingText = $TracingText;
+	let tracingSettings = $TracingSettingsStore;
+	let tracingText = $TracingTextStore;
 
 	onMount(() => {
 		backgroundCtx = backgroundCanvas.getContext('2d')!;

@@ -6,10 +6,7 @@
 	let paper: Paper;
 
 	onMount(() => {
-		paper = new Paper(canvas.getContext('2d')!, {
-			width: 10,
-			color: '#000000'
-		});
+		paper = new Paper(canvas.getContext('2d')!);
 
 		paper.setSize(canvas.parentElement?.clientWidth!, canvas.parentElement?.clientHeight!);
 	});

@@ -1,19 +1,25 @@
+import { get } from "svelte/store";
 import type { PenSettings } from "./PenSettings";
 import type { Point } from "./Point";
+import { PenSettingsStore } from "./Stores";
 
 export class Paper {
     private canvasCtx: CanvasRenderingContext2D
 
-    private penSettings: PenSettings
     private penPosition: Point
+    private penSettings: PenSettings
 
-    public constructor(canvasCtx: CanvasRenderingContext2D, settings: PenSettings) {
+    public constructor(canvasCtx: CanvasRenderingContext2D) {
         this.canvasCtx = canvasCtx;
-        this.penSettings = settings;
         this.penPosition = {
             x: 0,
             y: 0
         }
+
+        this.penSettings = get(PenSettingsStore)
+        PenSettingsStore.subscribe((settings) => {
+            this.penSettings = settings;
+        })
     }
 
     public setPenPosition(x: number, y: number) {
