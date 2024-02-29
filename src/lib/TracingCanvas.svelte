@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import TracingSettings from './Stores';
+	import { TracingSettings, TracingText } from './Stores';
 
 	let backgroundCanvas: HTMLCanvasElement;
 	let foregroundCanvas: HTMLCanvasElement;
@@ -9,6 +9,7 @@
 	let foregroundCtx: CanvasRenderingContext2D;
 
 	let tracingSettings = $TracingSettings;
+	let tracingText = $TracingText;
 
 	onMount(() => {
 		backgroundCtx = backgroundCanvas.getContext('2d')!;
@@ -20,7 +21,7 @@
 		foregroundCtx.canvas.width = foregroundCanvas.parentElement?.clientWidth!;
 		foregroundCtx.canvas.height = foregroundCanvas.parentElement?.clientHeight!;
 
-		strokeText('Hello, World', 100, 100);
+		strokeText(tracingText.text, 100, 100);
 	});
 
 	function strokeText(text: string, x: number, y: number) {
