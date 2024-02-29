@@ -21,14 +21,16 @@
 		foregroundCtx.canvas.width = foregroundCanvas.parentElement?.clientWidth!;
 		foregroundCtx.canvas.height = foregroundCanvas.parentElement?.clientHeight!;
 
-		strokeText(tracingText.text, 100, 100);
+		strokeText(tracingText.text, foregroundCtx.canvas.width / 2, foregroundCtx.canvas.height / 2);
 	});
 
 	function strokeText(text: string, x: number, y: number) {
 		backgroundCtx.font = `${tracingSettings.size}px ${tracingSettings.font}`;
+		backgroundCtx.textAlign = 'center';
 		backgroundCtx.fillText(text, x, y);
 
 		foregroundCtx.font = `${tracingSettings.size}px ${tracingSettings.font}`;
+		foregroundCtx.textAlign = 'center';
 		foregroundCtx.strokeText(text, x, y);
 	}
 </script>
