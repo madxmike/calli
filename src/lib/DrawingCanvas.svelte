@@ -29,7 +29,7 @@
 </script>
 
 <canvas
-	class="absolute"
+	class="absolute cursor-crosshair"
 	bind:this={canvas}
 	on:mousedown={onMouseClick}
 	on:mouseup={onMouseClick}
