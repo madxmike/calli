@@ -1,15 +1,19 @@
 <script lang="ts">
-	import DrawingCanvas from '$lib/DrawingCanvas.svelte';
-	import TracingCanvas from '$lib/TracingCanvas.svelte';
+	import ExerciseCanvas from '$lib/ExerciseCanvas.svelte';
 	import Toolbar from '$lib/Toolbar.svelte';
+	import { TracingSettingsStore } from '$lib/Stores';
+
+	TracingSettingsStore.set({
+		font: 'Calibri',
+		size: 102
+	});
 </script>
 
 <div class="w-full h-screen flex flex-col justify-center items-center">
-	<div class="w-1/2 h-[900px] bg-white shadow-lg rounded-xl items-center relative">
-		<TracingCanvas></TracingCanvas>
-		<DrawingCanvas></DrawingCanvas>
+	<div class="w-10/12 h-4/6 bg-white shadow-lg rounded-xl items-center relative">
+		<ExerciseCanvas />
 	</div>
-	<div class="w-1/2 h-16 mt-4">
+	<div class="mt-4">
 		<Toolbar></Toolbar>
 	</div>
 </div>

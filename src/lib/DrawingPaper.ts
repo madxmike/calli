@@ -3,7 +3,7 @@ import type { PenSettings } from "./PenSettings";
 import type { Point } from "./Point";
 import { PenSettingsStore } from "./Stores";
 
-export class Paper {
+export class DrawingPaper {
     private canvasCtx: CanvasRenderingContext2D
 
     private penPosition: Point
