@@ -1,15 +1,20 @@
 import { writable } from 'svelte/store';
+import type { TracingGrapheme } from './TracingGrapheme';
 
 export const PenSettingsStore = writable({
-    width: 10,
+    width: 8,
     color: "#000000"
 })
 
-export const TracingSettingsStore = writable({
+export interface TextSettings {
+    font: string;
+    size: number;
+}
+
+export const TextSettingsStore = writable<TextSettings>({
     font: "Calibri",
-    size: 102
+    size: 150
 });
 
-export const TracingTextStore = writable({
-    text: "Hello, World"
-})
+
+export const TracingGraphemesStore = writable<TracingGrapheme[]>([]);

@@ -1,12 +1,6 @@
 <script lang="ts">
 	import ExerciseCanvas from '$lib/ExerciseCanvas.svelte';
 	import Toolbar from '$lib/Toolbar.svelte';
-	import { TracingSettingsStore } from '$lib/Stores';
-
-	TracingSettingsStore.set({
-		font: 'Calibri',
-		size: 102
-	});
 </script>
 
 <div class="w-full h-screen flex flex-col justify-center items-center">
