@@ -1,6 +1,6 @@
 import type { Point } from "./Point";
 
-export interface TracingGrapheme {
+export interface SourceGraphemeData {
     position: Point,
     width: number,
     height: number,

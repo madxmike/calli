@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { TracingGrapheme } from './TracingGrapheme';
+	import type { SourceGraphemeData } from './SourceGraphemeData';
 	import { TextSettingsStore, type TextSettings } from './Stores';
 
 	let backgroundCanvas: HTMLCanvasElement;
@@ -47,9 +47,7 @@
 		backgroundCanvasCtx.putImageData(imageData, 0, 0);
 	}
 
-	export function drawText(text: string): TracingGrapheme[] {
-		console.log(text);
-
+	export function drawText(text: string): SourceGraphemeData[] {
 		let x = backgroundCanvasCtx.canvas.width / 2;
 		let y = backgroundCanvasCtx.canvas.height / 2;
 
@@ -58,7 +56,7 @@
 
 		// TODO (Michael): Properly split this text into graphemes by using itnl
 		const graphemes = text.split('');
-		const tracingGraphemes: TracingGrapheme[] = [];
+		const tracingGraphemes: SourceGraphemeData[] = [];
 
 		let fullTextMetrics = backgroundCanvasCtx.measureText(text);
 		let xOffset = -fullTextMetrics.width / 2;
@@ -71,7 +69,7 @@
 			backgroundCanvasCtx.fillText(grapheme, x + xOffset, y);
 			foregroundCanvasCtx.strokeText(grapheme, x + xOffset, y);
 
-			let tracingGrapheme: TracingGrapheme = {
+			let tracingGrapheme: SourceGraphemeData = {
 				position: {
 					x: x + xOffset,
 					y: y + baseline

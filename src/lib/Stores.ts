@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type { TracingGrapheme } from './TracingGrapheme';
+import type { SourceGraphemeData } from './SourceGraphemeData';
 
 export const PenSettingsStore = writable({
     width: 8,
@@ -17,4 +17,4 @@ export const TextSettingsStore = writable<TextSettings>({
 });
 
 
-export const TracingGraphemesStore = writable<TracingGrapheme[]>([]);
+export const SourceGraphemeDataStore = writable<SourceGraphemeData[]>([]);
