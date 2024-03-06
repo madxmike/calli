@@ -68,19 +68,16 @@
 			backgroundCanvasCtx.fillText(grapheme, x + xOffset, y);
 			foregroundCanvasCtx.strokeText(grapheme, x + xOffset, y);
 
+			let position = {
+				x: x + xOffset,
+				y: y - height * 0.8
+			};
+
 			let tracingGrapheme: SourceGraphemeData = {
-				position: {
-					x: x + xOffset,
-					y: y - height * 0.8
-				},
+				position: position,
 				width: width,
 				height: height,
-				imageData: backgroundCanvasCtx.getImageData(
-					x + xOffset - width,
-					y - height * 0.8,
-					width,
-					height
-				)
+				imageData: backgroundCanvasCtx.getImageData(position.x, position.y, width, height)
 			};
 
 			xOffset += width;
@@ -100,6 +97,7 @@
 </script>
 
 <canvas
+	hidden
 	id="source-background-canvas"
 	class="absolute cursor-crosshair"
 	bind:this={backgroundCanvas}

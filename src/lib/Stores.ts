@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 import type { SourceGraphemeData } from './SourceGraphemeData';
 
 export const PenSettingsStore = writable({
-    width: 8,
+    width: 10,
     color: "#000000"
 })
 

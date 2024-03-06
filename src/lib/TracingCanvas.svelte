@@ -60,6 +60,10 @@
 		dispatch('penmoved', { x: penPosition.x, y: penPosition.y });
 	}
 
+	export function getImageData(x: number, y: number, w: number, h: number): ImageData {
+		return canvasCtx.getImageData(x, y, w, h);
+	}
+
 	function onMouseClick(e: MouseEvent) {
 		setPenPosition(e.clientX, e.clientY);
 	}
