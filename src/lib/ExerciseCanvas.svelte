@@ -6,10 +6,7 @@
 	import type { PenMovedEvent } from './Events';
 	import type { ExerciseDifficulty } from './ExerciseDifficulty';
 
-	const OVERDRAW_PENALTY = 0.1;
-	const UNDERDRAW_PENALTY = 0.1;
-	const MASSIVE_OVERDRAW_PENALTY = 1;
-	const MASSIVE_OVERDRAW_PENALTY_THRESHOLD = 0.1;
+	const WHITE = 255;
 
 	export let text: string;
 	export let difficulty: ExerciseDifficulty;
@@ -93,26 +90,30 @@
 		var overdrawPixelCount = 0;
 		var underdrawPixelCount = 0;
 		var correctPixelCount = 0;
-		const WHITE = 255;
-		const BLACK = 0;
 
 		// TODO (Michael): Allow other colors to be used
 		for (var i = 0; i < tracingImageData.data.length; i += 4) {
-			if (sourceImageData.data[i] == BLACK) {
+			let isTracingPixelWhite =
+				tracingImageData.data[i] == WHITE &&
+				tracingImageData.data[i + 1] == WHITE &&
+				tracingImageData.data[i + 2] == WHITE;
+
+			let isSourcePixelWhite =
+				sourceImageData.data[i] == WHITE &&
+				sourceImageData.data[i + 1] == WHITE &&
+				sourceImageData.data[i + 2] == WHITE;
+
+			if (!isSourcePixelWhite) {
 				expectedPixelCount++;
 			}
 
-			// White && White = Okay, not expected
-			// White && Black = Underdraw
-			// Black && White = Overdraw
-			// Black && Black = Okay, expected
-			if (tracingImageData.data[i] == WHITE && sourceImageData.data[i] == WHITE) {
+			if (isTracingPixelWhite && isSourcePixelWhite) {
 				continue;
-			} else if (tracingImageData.data[i] == WHITE && sourceImageData.data[i] == BLACK) {
+			} else if (isTracingPixelWhite && !isSourcePixelWhite) {
 				underdrawPixelCount++;
-			} else if (tracingImageData.data[i] == BLACK && sourceImageData.data[i] == WHITE) {
+			} else if (!isTracingPixelWhite && isSourcePixelWhite) {
 				overdrawPixelCount++;
-			} else if (tracingImageData.data[i] == BLACK && sourceImageData.data[i] == BLACK) {
+			} else if (!isTracingPixelWhite && !isSourcePixelWhite) {
 				correctPixelCount++;
 			}
 		}
