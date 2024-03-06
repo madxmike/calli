@@ -24,19 +24,25 @@
 
 	function onPenMoved(e: CustomEvent<PenMovedEvent>) {
 		let { x, y } = e.detail;
-
-		let s = sourceGraphemeData[0];
-		console.log(s.position.x, s.position.y, s.width, s.height);
-		console.log(x, y);
-
-		if (
-			x >= s.position.x &&
-			y >= s.position.y &&
-			x <= s.position.x + s.width &&
-			y <= s.position.y + s.height
-		) {
-			console.log('inside');
-		}
+		let o = outputCanvas.getContext('2d')!;
+		o.clearRect(0, 0, outputCanvas.width, outputCanvas.height);
+		
+		sourceGraphemeData.forEach((sourceGraphemeData) => {
+			if (
+				x >= sourceGraphemeData.position.x &&
+				y >= sourceGraphemeData.position.y &&
+				x <= sourceGraphemeData.position.x + sourceGraphemeData.width &&
+				y <= sourceGraphemeData.position.y + sourceGraphemeData.height
+			) {
+				o.strokeStyle = '#FF0000';
+				o.strokeRect(
+					sourceGraphemeData.position.x,
+					sourceGraphemeData.position.y,
+					sourceGraphemeData.width,
+					sourceGraphemeData.height
+				);
+			}
+		});
 	}
 </script>
 

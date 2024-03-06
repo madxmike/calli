@@ -87,12 +87,12 @@
 
 			tracingGraphemes.push(tracingGrapheme);
 
-			backgroundCanvasCtx.strokeRect(
-				tracingGrapheme.position.x,
-				tracingGrapheme.position.y,
-				tracingGrapheme.width,
-				tracingGrapheme.height
-			);
+			// backgroundCanvasCtx.strokeRect(
+			// 	tracingGrapheme.position.x,
+			// 	tracingGrapheme.position.y,
+			// 	tracingGrapheme.width,
+			// 	tracingGrapheme.height
+			// );
 		}
 
 		return tracingGraphemes;
