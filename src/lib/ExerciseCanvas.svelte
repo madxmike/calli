@@ -4,6 +4,7 @@
 	import SourceCanvas from './SourceCanvas.svelte';
 	import type { SourceGraphemeData } from './SourceGraphemeData';
 	import type { PenMovedEvent } from './Events';
+	import type { ExerciseDifficulty } from './ExerciseDifficulty';
 
 	const OVERDRAW_PENALTY = 0.1;
 	const UNDERDRAW_PENALTY = 0.1;
@@ -11,6 +12,7 @@
 	const MASSIVE_OVERDRAW_PENALTY_THRESHOLD = 0.1;
 
 	export let text: string;
+	export let difficulty: ExerciseDifficulty;
 
 	let sourceCanvas: SourceCanvas;
 	let tracingCanvas: TracingCanvas;
@@ -94,6 +96,7 @@
 		const WHITE = 255;
 		const BLACK = 0;
 
+		// TODO (Michael): Allow other colors to be used
 		for (var i = 0; i < tracingImageData.data.length; i += 4) {
 			if (sourceImageData.data[i] == BLACK) {
 				expectedPixelCount++;
@@ -115,12 +118,15 @@
 		}
 
 		var score = correctPixelCount;
-		score -= underdrawPixelCount * UNDERDRAW_PENALTY;
-		if (overdrawPixelCount / expectedPixelCount > MASSIVE_OVERDRAW_PENALTY_THRESHOLD) {
-			score -= overdrawPixelCount * MASSIVE_OVERDRAW_PENALTY;
-		} else {
-			score -= overdrawPixelCount * OVERDRAW_PENALTY;
-		}
+		score -=
+			overdrawPixelCount / expectedPixelCount > difficulty.massiveOverdrawPenaltyThreshold
+				? overdrawPixelCount * difficulty.massiveOverdrawPenalty
+				: overdrawPixelCount * difficulty.overdrawPenalty;
+
+		score -=
+			underdrawPixelCount / expectedPixelCount > difficulty.massiveUnderdrawPenaltyThreshold
+				? underdrawPixelCount * difficulty.massiveUnderdrawPenalty
+				: underdrawPixelCount * difficulty.underdrawPenalty;
 
 		let finalScore = score / expectedPixelCount;
 		return finalScore > 0 ? finalScore : 0;

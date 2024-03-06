@@ -97,7 +97,6 @@
 </script>
 
 <canvas
-	hidden
 	id="source-background-canvas"
 	class="absolute cursor-crosshair"
 	bind:this={backgroundCanvas}
