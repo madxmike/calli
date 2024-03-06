@@ -64,7 +64,6 @@
 			let textMextrics = backgroundCanvasCtx.measureText(grapheme);
 			let width = textMextrics.width;
 			let height = textMextrics.fontBoundingBoxAscent + textMextrics.fontBoundingBoxDescent;
-			let baseline = (textMextrics as any).ideographicBaseline;
 
 			backgroundCanvasCtx.fillText(grapheme, x + xOffset, y);
 			foregroundCanvasCtx.strokeText(grapheme, x + xOffset, y);
@@ -72,7 +71,7 @@
 			let tracingGrapheme: SourceGraphemeData = {
 				position: {
 					x: x + xOffset,
-					y: y + baseline
+					y: y - height * 0.8
 				},
 				width: width,
 				height: height,
@@ -88,7 +87,12 @@
 
 			tracingGraphemes.push(tracingGrapheme);
 
-			backgroundCanvasCtx.strokeRect(x + xOffset - width, y - height * 0.8, width, height);
+			backgroundCanvasCtx.strokeRect(
+				tracingGrapheme.position.x,
+				tracingGrapheme.position.y,
+				tracingGrapheme.width,
+				tracingGrapheme.height
+			);
 		}
 
 		return tracingGraphemes;

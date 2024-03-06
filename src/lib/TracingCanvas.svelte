@@ -1,8 +1,13 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import type { Point } from './Point';
 	import type { PenSettings } from './PenSettings';
 	import { PenSettingsStore } from './Stores';
+	import type { PenMovedEvent } from './Events';
+
+	const dispatch = createEventDispatcher<{
+		penmoved: PenMovedEvent;
+	}>();
 
 	let canvas: HTMLCanvasElement;
 	let canvasCtx: CanvasRenderingContext2D;
@@ -18,7 +23,6 @@
 		let { clientWidth, clientHeight } = canvas.parentElement!;
 		canvasCtx.canvas.width = clientWidth;
 		canvasCtx.canvas.height = clientHeight;
-		canvasCtx.scale(clientWidth, clientHeight);
 
 		clear();
 	});
@@ -52,6 +56,8 @@
 			x: x - left,
 			y: y - top
 		};
+
+		dispatch('penmoved', { x: penPosition.x, y: penPosition.y });
 	}
 
 	function onMouseClick(e: MouseEvent) {
